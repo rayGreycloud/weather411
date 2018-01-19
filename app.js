@@ -1,5 +1,10 @@
-// Init 
-const weather = new Weather('Portland', 'OR');
+// Init storage
+const storage = new Storage();
+// Get stored location data 
+const weatherLoc = storage.getLocationData();
+// Init weather object
+const weather = new Weather(weatherLoc.city, weatherLoc.state);
+// Init UI
 const ui = new UI();
 
 // Call getWeather on DOM load
@@ -13,6 +18,8 @@ document.getElementById('w-change-btn')
     const state = document.getElementById('state').value;
     // Change location
     weather.changeLocation(city, state);
+    // Set location in localStorage 
+    storage.setLocationData(city, state);
     // Fetch and display weather 
     getWeather();  
     // Close modal 
